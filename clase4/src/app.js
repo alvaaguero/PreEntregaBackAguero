@@ -43,5 +43,17 @@ const pmanagersocket=new ProductManager(__dirname+"/files/products.json")
 socketServer.on("connection", async(socket)=>{
     console.log("client connected con ID:", socket.id)
     const listadeproductos=await pmanagersocket.getProducts({})
-    socket.emit("enviodeproducts", listadeproductos)
+    socketServer.emit("enviodeproducts", listadeproductos)
+
+    socket.on("addProduct", async(obj)=>{
+        await pmanagersocket.addProduct(obj)
+        const listadeproductos=await pmanagersocket.getProducts({})
+        socketServer.emit("enviodeproducts", listadeproductos)
+    })
+
+    socket.on("deleteProduct", async(id)=>{
+        await pmanagersocket.deleteProduct(id)
+        const listadeproductos=await pmanagersocket.getProducts({})
+        socketServer.emit("enviodeproducts", listadeproductos)
+    })
 })
