@@ -1,5 +1,5 @@
 import {Router} from "express"
-import ProductManager from "../manager/productManager.js"
+import ProductManager from "../managers/productManager.js"
 import { __dirname } from "../utils.js"
 
 const manager=new ProductManager(__dirname+'/files/products.json')

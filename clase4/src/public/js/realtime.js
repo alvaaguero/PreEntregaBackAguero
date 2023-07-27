@@ -1,10 +1,10 @@
 const socketClient=io()
 
 
-
-socketClient.on("enviodeproducts", (obj)=>{
+socketClient.on("enviodeproducts",(obj)=>{
     updateProductList(obj)
 })
+
 
 function updateProductList(products) {
     let div = document.getElementById("list-products");
@@ -38,11 +38,6 @@ function updateProductList(products) {
         
       </article>
           
-          
-          
-          
-          
-          
           `;
     });
   
@@ -62,7 +57,7 @@ form.addEventListener("submit", (evt) => {
   let price = form.elements.price.value;
   let code = form.elements.code.value;
 
-  socketCliente.emit("addProduct", {
+  socketClient.emit("addProduct", {
     title,
     description,
     stock,
